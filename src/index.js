@@ -1,12 +1,30 @@
+// Modules
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
-import './index.css';
-import { Router, Route, Link, browserHistory } from 'react-router';
+import { Router, Route, browserHistory } from 'react-router';
 
+// Pages
+import App from './App';
+import Home from './Pages/HomePage';
+import Login from './Pages/Login';
+import Register from './Pages/Register';
+import Logout from './Pages/Logout';
+import User from './Pages/User';
+
+// Css
+import './index.css';
+
+
+
+// Imposto le pagine della mia APP
 ReactDOM.render((
     <Router history={browserHistory}>
-        <Route path="/" component={App}>
+        <Route path="" component={App}>
+            <Route path="/" component={Home}> </Route>
+            <Route path="/login" component={Login}> </Route>
+            <Route path="/register" component={Register}> </Route>
+            <Route path="/user" component={User}> </Route>
+            <Route path="/logout" component={Logout}> </Route>
         </Route>
     </Router>),
   document.getElementById('root')

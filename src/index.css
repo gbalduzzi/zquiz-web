@@ -1,5 +1,88 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: 'Roboto', sans-serif;
+}
+
+/**
+ * HEADER section
+ *
+ */
+.App {
+    margin-top: 100px !important;
+}
+
+.App #header {
+    position: fixed;
+    width: 100%;
+    left: 0;
+    top: 0;
+    height: 90px;
+    background-color: #111;
+    display: flex;
+}
+
+.App #header .page-wrapper {
+    display: flex;
+    align-content: center;
+    margin: auto;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.App #header #logo {
+    max-width: 150px;
+    margin: auto;
+    margin-left: 0px;
+    align-content: center;
+}
+
+.App #header #logo .logo-img {
+    max-width: 150px;
+    max-height: 70px;
+    vertical-align: middle;
+}
+
+.App #header .space-fill {
+    flex-grow: 1;
+}
+
+.App #header a.header-item {
+    text-decoration: none;
+    height: 100%;
+    line-height: 90px;
+    padding-left: 15px;
+    padding-right: 15px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #0F6910
+}
+
+.App #header a.header-item:hover {
+    color: #0c9e0d;
+    background-color: #333;
+}
+
+/* Schermi > 1200px */
+.page-wrapper {
+    width: 1200px;
+    margin: auto;
+}
+
+@media screen and (max-width: 1200px) {
+    .page-wrapper {
+        width: 1000px;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .page-wrapper {
+        width: 1000px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .page-wrapper {
+        width: 98%;
+    }
 }
