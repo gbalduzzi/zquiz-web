@@ -1,23 +1,22 @@
 import 'whatwg-fetch';
-import {getCookie, setCookie} from './cookie.js';
+import {setCookie} from './cookie.js';
 import config from '../../config.json';
 
 /*
  * File contente i metodi per le chiamate REST al server
  */
 
-class apiInterface {
-    constructor() {
-        this.url = config.api_url;
-    }
+const url = config.api_url;
+
+class Api {
 
     /*
      * Register new user
      * data is an object containing user data
      * fn is the success function callback
      */
-    register(data,fn) {
-        fetch(this.url+'/register', {
+    static register(data,fn) {
+        fetch(url+'/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -48,8 +47,8 @@ class apiInterface {
      * data is an object containing user data
      * fn is the success function callback
      */
-    authenticate(data,fn) {
-        fetch(this.url+'/authenticate', {
+    static authenticate(data,fn) {
+        fetch(url+'/authenticate', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -74,7 +73,5 @@ class apiInterface {
         });
     }
 }
-
-const Api = new apiInterface();
 
 export default Api;

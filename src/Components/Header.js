@@ -25,12 +25,18 @@ function getItemsByRoute(route) {
             }
             break;
         case '/login':
-            items.push(itemObj('/', 'Homepage'))
-            items.push(itemObj('/register', 'Registrati'))
+            if(cookie) items.push(itemObj('/user', 'Profilo'))
+            else {
+                items.push(itemObj('/', 'Homepage'))
+                items.push(itemObj('/register', 'Registrati'))
+            }
             break;
         case '/register':
-            items.push(itemObj('/', 'Homepage'))
-            items.push(itemObj('/login', 'Login'))
+            if(cookie) items.push(itemObj('/user', 'Profilo'))
+            else {
+                items.push(itemObj('/', 'Homepage'))
+                items.push(itemObj('/login', 'Login'))
+            }
             break;
         default:
             items.push(itemObj('/', 'Homepage'))
@@ -43,17 +49,25 @@ function getItemsByRoute(route) {
 
 // Component to create the top header of the app
 class Header extends Component {
-    constructor(props) {
-        super(props);
+    // Imposto i link della pagina iniziale
+    componentWillMount() {
         this.state = {
-            data: getItemsByRoute(props.pathname)
+            data: getItemsByRoute(this.props.pathname)
         }
+    }
+    // Cambio i link se la pagina si aggiorna
+    componentWillReceiveProps(nextProps) {
+          if (nextProps.pathname) {
+              this.setState({
+                  data : getItemsByRoute(nextProps.pathname)
+              });
+          }
     }
     render() {
         //var linkArray = getItemsByRoute(this.props.pathname);
         var links = this.state.data.map(function(item, index) {
             return (
-                <Link to={item.url} className="header-item" key={index}> {item.text} </Link>
+                <HeaderItem link={item.url} key={index}>{item.text}</HeaderItem>
             );
         });
         return (
@@ -82,4 +96,4 @@ class HeaderItem extends Component {
   }
 }
 
-export {Header, HeaderItem};
+export default Header;
