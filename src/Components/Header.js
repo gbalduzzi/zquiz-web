@@ -65,9 +65,9 @@ class Header extends Component {
     }
     render() {
         //var linkArray = getItemsByRoute(this.props.pathname);
-        var links = this.state.data.map(function(item, index) {
+        var links = this.state.data.map(function(item) {
             return (
-                <HeaderItem link={item.url} key={index}>{item.text}</HeaderItem>
+                <HeaderItem link={item.url} key={Math.random()*1000}>{item.text}</HeaderItem>
             );
         });
         return (

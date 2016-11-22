@@ -2,6 +2,8 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Roboto', sans-serif;
+  color: #333;
+  background-color: #EEE;
 }
 
 /**
@@ -28,6 +30,7 @@ body {
     margin: auto;
     margin-top: 0px;
     margin-bottom: 0px;
+    justify-content: center;
 }
 
 .App #header #logo {
@@ -63,7 +66,95 @@ body {
     background-color: #333;
 }
 
-/* Schermi > 1200px */
+/*
+ * Message section
+ */
+.App .message {
+    margin: auto;
+    margin-top: 10px;
+    text-align: center;
+    width: 90%;
+    max-width: 600px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.App .message .deleteMessage {
+    font-family: Verdana,sans-serif;
+    float: right;
+    font-weight:700;
+    cursor: pointer;
+}
+
+.App .message.error {
+    color: #a94442;
+    border: 1px solid #ebccd1;
+    background-color: #f2dede;
+}
+
+.App .message.error .deleteMessage {
+    color: #d4919c;
+}
+
+.App .message.error .deleteMessage:hover {
+    color: #a94442
+}
+
+/*
+ * GLOBAL section
+ */
+.App .content {
+    text-align: center;
+    padding: 20px;
+}
+
+.App .content b {
+    color: #0F6910
+}
+
+/*
+ * Forms
+ */
+.App .auth-form {
+    text-align: center;
+}
+
+.App .auth-form .input {
+    display: block;
+    margin: auto;
+    padding: 5px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    width: 250px;
+    border: 1px solid #666;
+}
+
+.App .auth-form .input:focus {
+    border: 1px solid #CCC;
+    outline-color: #0F6910
+}
+
+.App .auth-form .text-input::placeholder {
+    text-align: center;
+}
+
+.App .auth-form .submit-button {
+    padding: 10px;
+    width: 260px;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 13pt;
+    letter-spacing: 1.5px;
+    color: #111;
+    background-color: #0F6910;
+    border-radius: 5px;
+}
+
+.App .auth-form .submit-button:active {
+    background-color: #0F6910
+}
+
+/* media queries */
 .page-wrapper {
     width: 1200px;
     margin: auto;
@@ -84,5 +175,22 @@ body {
 @media screen and (max-width: 1024px) {
     .page-wrapper {
         width: 98%;
+    }
+}
+
+@media screen and (max-width:500px) {
+    .App #header {
+        height: 70px;
+    }
+
+    .App #header #logo .logo-img {
+        max-width: 100px;
+        max-height: 50px;
+    }
+
+    .App #header a.header-item {
+        line-height: 70px;
+        padding-left: 5px;
+        padding-right: 5px;
     }
 }
