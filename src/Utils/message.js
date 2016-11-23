@@ -11,6 +11,15 @@
 class Messages {
     constructor() {
         this.messagesList = []
+        this.flush = false
+    }
+
+    getFlush() {
+        return this.flush;
+    }
+
+    setFlush(x) {
+        this.flush = x;
     }
 
     addMessage(type, text) {

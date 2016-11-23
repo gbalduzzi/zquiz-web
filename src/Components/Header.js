@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 
 import {getCookie} from '../Utils/cookie.js';
+import Message from '../Utils/message.js';
 
 import logo from '../Images/Logo@3x.png';
 
@@ -49,6 +50,10 @@ function getItemsByRoute(route) {
 
 // Component to create the top header of the app
 class Header extends Component {
+    constructor(props){
+        super(props)
+        this.prevPathname = props.pathname
+    }
     // Imposto i link della pagina iniziale
     componentWillMount() {
         this.state = {
@@ -57,10 +62,12 @@ class Header extends Component {
     }
     // Cambio i link se la pagina si aggiorna
     componentWillReceiveProps(nextProps) {
-          if (nextProps.pathname) {
+          if (nextProps.pathname !== this.prevPathname) {
               this.setState({
                   data : getItemsByRoute(nextProps.pathname)
               });
+              this.prevPathname = nextProps.pathname
+              Message.setFlush(true)
           }
     }
     render() {

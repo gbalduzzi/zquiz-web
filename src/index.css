@@ -100,6 +100,34 @@ body {
     color: #a94442
 }
 
+.App .message.success {
+    color: #3c763d;
+    border: 1px solid #d6e9c6;
+    background-color: #dff0d8;
+}
+
+.App .message.success .deleteMessage {
+    color: #d6e9c6;
+}
+
+.App .message.success .deleteMessage:hover {
+    color: #3c763d
+}
+
+.App .message.info {
+    color: #31708f;
+    border: 1px solid #bce8f1;
+    background-color: #d9edf7;
+}
+
+.App .message.info .deleteMessage {
+    color: #bce8f1;
+}
+
+.App .message.info .deleteMessage:hover {
+    color: #3c763d
+}
+
 /*
  * GLOBAL section
  */
@@ -148,6 +176,7 @@ body {
     color: #111;
     background-color: #0F6910;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .App .auth-form .submit-button:active {

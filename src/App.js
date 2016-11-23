@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Header from './Components/Header.js';
 
+import {getCookie} from './Utils/cookie.js';
 import Message from './Utils/message.js'
 
 // Layout common to all pages
@@ -11,26 +12,45 @@ class App extends Component {
         this.state = {
             messages : []
         }
-
         this.deleteItem = this.deleteItem.bind(this)
     }
     componentDidMount() {
         this.messageTimer = setInterval(
             () => this.messages(),
-            750
+            250
         );
+    }
+    componentWillMount() {
+        this.checkLogged(this.props);
     }
     componentWillUnmount() {
         clearInterval(this.messageTimer)
     }
+    componentWillReceiveProps(nextProps) {
+        this.checkLogged(nextProps)
+    }
+    checkLogged(props) {
+        var userLogged = getCookie('user_token') ? true : false
+
+        if (userLogged && (props.location.pathname === '/login' || props.location.pathname === '/register'))
+            props.router.push('/user')
+    }
     messages() {
-        var messages = Message.getMessages()
-        if (messages[0]) {
-            messages = this.state.messages.concat(messages)
+        if (Message.getFlush()) {
             this.setState({
-                messages : messages
+                messages: []
             })
+            Message.setFlush(false)
+        } else {
+            var messages = Message.getMessages()
+            if (messages[0]) {
+                messages = this.state.messages.concat(messages)
+                this.setState({
+                    messages : messages
+                })
+            }
         }
+
     }
     deleteItem(e) {
         var index = e.target.getAttribute('data-id')
