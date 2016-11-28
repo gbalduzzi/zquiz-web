@@ -31,9 +31,12 @@ class App extends Component {
     }
     checkLogged(props) {
         var userLogged = getCookie('user_token') ? true : false
+        var actualPath = props.location.pathname
 
-        if (userLogged && (props.location.pathname === '/login' || props.location.pathname === '/register'))
+        if (userLogged && (actualPath === '/login' || actualPath === '/register'))
             props.router.push('/user')
+        else if(!userLogged && actualPath !== '/login' && actualPath !== '/register' && actualPath !== '/')
+            props.router.push('/')
     }
     messages() {
         if (Message.getFlush()) {

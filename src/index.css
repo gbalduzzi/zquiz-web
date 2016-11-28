@@ -192,6 +192,7 @@ body {
 }
 
 .App #searchMatch {
+    display:block;
     margin: auto;
     width: 200px;
     padding: 10px;
@@ -199,6 +200,7 @@ body {
     font-size: 13pt;
     letter-spacing: 1.5px;
     color: #111;
+    text-decoration: none;
     background-color: #0F6910;
     border-radius: 5px;
     cursor: pointer;
@@ -206,6 +208,26 @@ body {
 
 .App .userInfo span {
     display: block;
+}
+
+.App .searchMatch .loaderWrapper {
+    padding-top: 75px;
+    padding-bottom: 40px;
+}
+
+.App .searchMatch .loader {
+    margin:auto;
+    border: 4px solid #EEE; /* Light grey */
+    border-top: 4px solid #0F6910; /* Blue */
+    border-radius: 50%;
+    width: 75px;
+    height: 75px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 /*
  * Forms

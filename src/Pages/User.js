@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 
 import Api from '../Utils/api.js'
 import Message from '../Utils/message.js'
@@ -54,7 +55,7 @@ class User extends Component {
                     </div>
                 </div>
                 <div className="searchMatchWrapper">
-                    <div id="searchMatch">Gioca</div>
+                    <Link to={'/searchMatch'} id="searchMatch">Gioca</Link>
                 </div>
             </div>
         );

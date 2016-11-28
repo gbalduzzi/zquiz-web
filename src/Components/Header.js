@@ -26,18 +26,15 @@ function getItemsByRoute(route) {
             }
             break;
         case '/login':
-            if(cookie) items.push(itemObj('/user', 'Profilo'))
-            else {
-                items.push(itemObj('/', 'Homepage'))
-                items.push(itemObj('/register', 'Registrati'))
-            }
+            items.push(itemObj('/', 'Homepage'))
+            items.push(itemObj('/register', 'Registrati'))
             break;
         case '/register':
-            if(cookie) items.push(itemObj('/user', 'Profilo'))
-            else {
-                items.push(itemObj('/', 'Homepage'))
-                items.push(itemObj('/login', 'Login'))
-            }
+            items.push(itemObj('/', 'Homepage'))
+            items.push(itemObj('/login', 'Login'))
+            break;
+        case '/searchMatch':
+            items.push(itemObj('/user', 'Profilo'))
             break;
         default:
             items.push(itemObj('/', 'Homepage'))

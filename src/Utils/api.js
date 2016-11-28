@@ -1,5 +1,5 @@
 import 'whatwg-fetch';
-import {setCookie} from './cookie.js';
+import {getCookie, setCookie} from './cookie.js';
 import config from '../../config.json';
 
 /*
@@ -81,6 +81,28 @@ class Api {
      */
     static getUser(user,fn) {
         fetch(url+'/user?username='+encodeURIComponent(user), {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+        .then(function(response) {
+            return response.json();
+        }).then(function(json) {
+            fn(json);
+        })
+        .catch(function(error) {
+            console.log("Errore!");
+            console.log(error);
+        });
+    }
+
+    /*
+     * searchMatch
+     * fn is the success function callback
+     */
+    static searchMatch(fn) {
+        var token = getCookie('user_token');
+        fetch(url+'/searchmatch?token='+encodeURIComponent(token), {
             headers: {
                 'Content-Type': 'application/json'
             },
