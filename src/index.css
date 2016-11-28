@@ -140,6 +140,22 @@ body {
     color: #0F6910
 }
 
+.App .content .redirect-link {
+    display: block;
+    padding-bottom: 20px;
+    text-decoration: none;
+}
+
+.App .content .redirect-link a {
+    text-decoration: none;
+    color: #0F6910;
+}
+
+.App .content .redirect-link a:hover {
+    text-decoration: underline;;
+    color: #0F6910;
+}
+
 /*
  * Forms
  */
