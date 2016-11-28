@@ -14,6 +14,7 @@ class Register extends Component {
             Message.addMessage('success','La registrazione ha avuto successo!')
             setTimeout(this.props.router.push('/user'), 1000)
         } else {
+            localStorage.removeItem('username');
             Message.addMessage('error','I dati inseriti non sono validi')
         }
     }
@@ -35,9 +36,9 @@ class Register extends Component {
 class RegisterForm extends Component {
     constructor(props) {
         super(props)
-        this.validateForm = this.validateForm.bind(this)
+        this.submitForm = this.submitForm.bind(this)
     }
-    validateForm(e) {
+    submitForm(e) {
         e.preventDefault()
         Message.setFlush(true);
         const user = document.getElementById('username').value;
@@ -52,6 +53,7 @@ class RegisterForm extends Component {
         else if (psw !== confirmPsw)
             Message.addMessage('error','Le password inserite non coincidono')
         else {
+            localStorage.username = user;
             Api.register({
                 username: user,
                 password: psw,
@@ -62,7 +64,7 @@ class RegisterForm extends Component {
     }
     render() {
         return (
-            <form id="register-form" className="auth-form" onSubmit={this.validateForm}>
+            <form id="register-form" className="auth-form" onSubmit={this.submitForm}>
                 <input type="text" name="username" id="username" className="text-input input" placeholder="Username" tabIndex="1"/>
                 <input type="password" name="password" id="password" className="text-input input" placeholder="Password" tabIndex="2"/>
                 <input type="password" name="password-confirm" id="password-confirm" className="text-input input" placeholder="Conferma Password" tabIndex="3"/>

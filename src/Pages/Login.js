@@ -14,6 +14,7 @@ class Login extends Component {
             Message.addMessage('success','Login eseguito con successo')
             setTimeout(this.props.router.push('/user'), 1000)
         } else {
+            localStorage.removeItem('username');
             Message.addMessage('error','I dati inseriti non sono validi')
         }
     }
@@ -35,9 +36,9 @@ class Login extends Component {
 class LoginForm extends Component {
     constructor(props) {
         super(props)
-        this.validateForm = this.validateForm.bind(this)
+        this.submitForm = this.submitForm.bind(this)
     }
-    validateForm(e) {
+    submitForm(e) {
         e.preventDefault()
         Message.setFlush(true);
         const user = document.getElementById('username').value
@@ -45,6 +46,7 @@ class LoginForm extends Component {
         if (user === "" || psw === "") {
             Message.addMessage('error','Non tutti i campi sono stati compilati')
         } else {
+            localStorage.username = user;
             Api.authenticate({
                 username: user,
                 password: psw
@@ -53,7 +55,7 @@ class LoginForm extends Component {
     }
     render() {
         return (
-            <form id="login-form" className="auth-form" onSubmit={this.validateForm}>
+            <form id="login-form" className="auth-form" onSubmit={this.submitForm}>
                 <input type="text" name="username" id="username" className="text-input input" placeholder="Username"  tabIndex="1"/>
                 <input type="password" name="password" id="password" className="text-input input" placeholder="Password" tabIndex="2"/>
                 <input type="submit" value="Login" className="submit-button input" tabIndex="3"/>

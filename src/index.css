@@ -152,10 +152,61 @@ body {
 }
 
 .App .content .redirect-link a:hover {
-    text-decoration: underline;;
+    text-decoration: underline;
     color: #0F6910;
 }
 
+/*
+ * User
+ */
+  .App .user {
+     display: flex;
+     max-width: 600px;
+     margin: auto;
+     margin-top: 50px;
+ }
+
+ .App .user .content {
+     flex-grow: 1;
+ }
+
+.App .userInfo .username {
+    color: #0F6910;
+    text-transform: capitalize;
+    font-weight: 700;
+}
+
+.App .userInfo {
+    width: 200px;
+    margin: auto;
+    line-height: 200%;
+    background-color: #BBB;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.App .searchMatchWrapper {
+    margin: auto;
+    text-align: center;
+    flex-grow: 1;
+}
+
+.App #searchMatch {
+    margin: auto;
+    width: 200px;
+    padding: 10px;
+    font-weight: 700;
+    font-size: 13pt;
+    letter-spacing: 1.5px;
+    color: #111;
+    background-color: #0F6910;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.App .userInfo span {
+    display: block;
+}
 /*
  * Forms
  */
@@ -237,5 +288,14 @@ body {
         line-height: 70px;
         padding-left: 5px;
         padding-right: 5px;
+    }
+
+    .App .user {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .App .user .searchMatchWrapper {
+        margin-top: 30px;
     }
 }

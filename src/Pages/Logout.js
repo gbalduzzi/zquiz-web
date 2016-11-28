@@ -7,7 +7,10 @@ class Logout extends Component {
     componentWillMount() {
         // Elimino dati utente
         deleteCookie('user_token')
-        localStorage.userData = {}
+        localStorage.removeItem('username')
+        localStorage.removeItem('surname')
+        localStorage.removeItem('name')
+        localStorage.removeItem('wins')
         // Redirect ad homepage
         this.props.router.push('/')
         Message.setFlush(true)

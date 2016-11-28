@@ -72,6 +72,29 @@ class Api {
             console.log(error);
         });
     }
+
+
+    /*
+     * getUser -> get user data by ID
+     * username: username of the user to obtain infos
+     * fn is the success function callback
+     */
+    static getUser(user,fn) {
+        fetch(url+'/user?username='+encodeURIComponent(user), {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+        .then(function(response) {
+            return response.json();
+        }).then(function(json) {
+            fn(json);
+        })
+        .catch(function(error) {
+            console.log("Errore!");
+            console.log(error);
+        });
+    }
 }
 
 export default Api;
