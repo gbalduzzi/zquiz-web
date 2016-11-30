@@ -3,20 +3,34 @@ import React, { Component } from 'react';
 import Api from '../Utils/api.js'
 import Message from '../Utils/message.js'
 
-function test(json) {
-    console.log(json)
-}
-
 class SearchMatch extends Component {
     constructor(props) {
         super(props)
+
+        this.requestMatch = this.requestMatch.bind(this)
+        this.beginMatch = this.beginMatch.bind(this)
     }
-    checkMatch() {
-        Api.searchMatch(test)
+    requestMatch() {
+        Api.searchMatch(this.beginMatch)
+    }
+    beginMatch(json) {
+        if (json.error !== 0) {
+            clearInterval(this.searchTimer)
+            this.props.router.push('/user')
+            Message.addMessage('error','Si è verificato un errore. Preghiamo di riprovare')
+            return;
+        }
+
+        if(json.match_id) { //Partita trovata
+            clearInterval(this.searchTimer)
+            localStorage.match_id = json.match_id
+            localStorage.opponent = json.opponent
+            this.props.router.push('/match')
+        }
     }
     componentDidMount() {
         this.searchTimer = setInterval(
-            this.checkMatch,
+            this.requestMatch,
             1500
         )
     }
