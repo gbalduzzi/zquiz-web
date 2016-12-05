@@ -55,7 +55,7 @@ class User extends Component {
                     </div>
                 </div>
                 <div className="searchMatchWrapper">
-                    <Link to={'/searchMatch'} id="searchMatch">Gioca</Link>
+                    <Link to={'/searchMatch'} id="searchMatch" className="button">Gioca</Link>
                 </div>
             </div>
         );

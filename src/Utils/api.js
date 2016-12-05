@@ -73,7 +73,6 @@ class Api {
         });
     }
 
-
     /*
      * getUser -> get user data by ID
      * username: username of the user to obtain infos
@@ -106,6 +105,59 @@ class Api {
             headers: {
                 'Content-Type': 'application/json'
             },
+        })
+        .then(function(response) {
+            return response.json();
+        }).then(function(json) {
+            fn(json);
+        })
+        .catch(function(error) {
+            console.log("Errore!");
+            console.log(error);
+        });
+    }
+
+    /*
+     * getQuestion
+     * n number of the question
+     * fn is the success function callback
+     */
+    static getQuestion(n, fn) {
+        var token = getCookie('user_token');
+        var match_id = localStorage.match_id;
+
+        fetch(url+'/question?token='+encodeURIComponent(token)+"&match_id="+encodeURIComponent(match_id)+"&number="+encodeURIComponent(n), {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+        .then(function(response) {
+            return response.json();
+        }).then(function(json) {
+            fn(json);
+        })
+        .catch(function(error) {
+            console.log("Errore!");
+            console.log(error);
+        });
+    }
+
+    /*
+     * reply to a question
+     * data is an object containing reply data
+     * fn is the success function callback
+     */
+    static reply(data,fn) {
+        fetch(url+'/reply', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                match_id: data.match_id,
+                number: data.number,
+                token: getCookie('user_token')
+            })
         })
         .then(function(response) {
             return response.json();

@@ -70,7 +70,7 @@ class RegisterForm extends Component {
                 <input type="password" name="password-confirm" id="password-confirm" className="text-input input" placeholder="Conferma Password" tabIndex="3"/>
                 <input type="text" name="name" id="name" className="text-input input" placeholder="Nome" tabIndex="4"/>
                 <input type="text" name="surname" id="surname" className="text-input input" placeholder="Cognome" tabIndex="5" />
-                <input type="submit" value="Registrati" className="submit-button input" tabIndex="6"/>
+                <input type="submit" value="Registrati" className="submit-button input button" tabIndex="6"/>
             </form>
         )
     }

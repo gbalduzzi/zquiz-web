@@ -58,7 +58,7 @@ class LoginForm extends Component {
             <form id="login-form" className="auth-form" onSubmit={this.submitForm}>
                 <input type="text" name="username" id="username" className="text-input input" placeholder="Username"  tabIndex="1"/>
                 <input type="password" name="password" id="password" className="text-input input" placeholder="Password" tabIndex="2"/>
-                <input type="submit" value="Login" className="submit-button input" tabIndex="3"/>
+                <input type="submit" value="Login" className="submit-button input button" tabIndex="3"/>
             </form>
         )
     }

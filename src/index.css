@@ -156,6 +156,14 @@ body {
     color: #0F6910;
 }
 
+.App .button {
+    color: #111;
+    text-decoration: none;
+    background-color: #0F6910;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
 /*
  * User
  */
@@ -185,6 +193,10 @@ body {
     border-radius: 10px;
 }
 
+.App .match .userInfo {
+    margin-top: 30px;
+}
+
 .App .searchMatchWrapper {
     margin: auto;
     text-align: center;
@@ -199,11 +211,6 @@ body {
     font-weight: 700;
     font-size: 13pt;
     letter-spacing: 1.5px;
-    color: #111;
-    text-decoration: none;
-    background-color: #0F6910;
-    border-radius: 5px;
-    cursor: pointer;
 }
 
 .App .userInfo span {
@@ -229,6 +236,37 @@ body {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+/*
+ * Match section
+ */
+
+.App .match {
+    text-align: center;
+}
+
+.App .match .answer {
+    padding: 10px;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #999;
+    border-radius: 5px;
+    cursor: pointer;
+    max-width: 400px;
+}
+
+.App .match .answer.selected {
+    border-color: #0F6910;
+    background-color: #dff0d8;
+}
+
+.App .match #answer_button {
+    font-weight: 700;
+    font-size: 13pt;
+    letter-spacing: 1.5px;
+}
+
 /*
  * Forms
  */
@@ -262,10 +300,6 @@ body {
     font-weight: 700;
     font-size: 13pt;
     letter-spacing: 1.5px;
-    color: #111;
-    background-color: #0F6910;
-    border-radius: 5px;
-    cursor: pointer;
 }
 
 .App .auth-form .submit-button:active {

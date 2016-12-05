@@ -6,14 +6,14 @@ import Message from '../Utils/message.js'
 class SearchMatch extends Component {
     constructor(props) {
         super(props)
-
         this.requestMatch = this.requestMatch.bind(this)
-        this.beginMatch = this.beginMatch.bind(this)
+        this.checkMatch = this.checkMatch.bind(this)
+        this.setOpponentDetails = this.setOpponentDetails.bind(this)
     }
     requestMatch() {
-        Api.searchMatch(this.beginMatch)
+        Api.searchMatch(this.checkMatch)
     }
-    beginMatch(json) {
+    checkMatch(json) {
         if (json.error !== 0) {
             clearInterval(this.searchTimer)
             this.props.router.push('/user')
@@ -25,8 +25,19 @@ class SearchMatch extends Component {
             clearInterval(this.searchTimer)
             localStorage.match_id = json.match_id
             localStorage.opponent = json.opponent
-            this.props.router.push('/match')
+
+            Api.getUser(json.opponent, this.setOpponentDetails)
         }
+    }
+    setOpponentDetails(json) {
+        if (json.error === 0) {
+            localStorage.opponentName = json.name
+            localStorage.opponentSurname = json.surname
+            localStorage.opponentWins = json.wins
+        }
+
+        this.props.router.push('/match/'+localStorage.match_id)
+
     }
     componentDidMount() {
         this.searchTimer = setInterval(
