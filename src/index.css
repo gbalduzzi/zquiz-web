@@ -261,6 +261,17 @@ body {
     background-color: #dff0d8;
 }
 
+.App .match .answer.selected.correct {
+    background-color: #0F6910;
+    color: #DDD
+}
+
+.App .match .answer.selected.wrong {
+    background-color: #a94442;
+    border-color: #a94442;
+    color: #DDD
+}
+
 .App .match #answer_button {
     font-weight: 700;
     font-size: 13pt;
