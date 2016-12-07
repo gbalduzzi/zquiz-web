@@ -13,6 +13,7 @@ class Match extends Component {
         this.answerClick = this.answerClick.bind(this)
         this.submitAnswer = this.submitAnswer.bind(this)
         this.verifyCorrectAnswer = this.verifyCorrectAnswer.bind(this)
+        this.endMatch = this.endMatch.bind(this)
     }
     componentWillMount() {
         // Inizializzo lo stato
@@ -27,7 +28,8 @@ class Match extends Component {
             },
             score: 0,
             opponent_score : 0,
-            selected_answer : 0
+            selected_answer : 0,
+            answered : false
         }
 
         setTimeout(this.getNextQuestion, 2000)
@@ -35,12 +37,29 @@ class Match extends Component {
     }
     getNextQuestion() {
         var n = parseInt(this.state.question.number, 10)
-        if (n <0 || n > 3) return; // TODO: ?!??!?
+        if (n > 3) {
+            Api.endMatch(this.endMatch)
+        } else if (n < 0) {
+            return
+        }
         Api.getQuestion(n+1, this.updateQuestion)
 
     }
+    endMatch(json) {
+        if (json.error === 1) return
+
+        localStorage.opponentScore = json.opponent_score
+        localStorage.score = json.score
+
+        this.props.router.push('/endmatch/'+localStorage.match_id)
+    }
     updateQuestion(json) {
-        if(json.error === 1) return; //TODO
+        if(json.error === 1) return //TODO
+
+        if(json.error === 0 && !json.question) { //Non è passato abbastanza tempo, aspetto
+            Api.getQuestion(parseInt(this.state.question.number, 10)+1, this.updateQuestion)
+            return
+        }
 
         this.setState({
             question: {
@@ -53,18 +72,24 @@ class Match extends Component {
             },
             score: json.score,
             opponent_score: json.opponent_score,
-            selected_answer : 0
+            selected_answer : 0,
+            answered : false
         })
+
+        localStorage.score = json.score
+        localStorage.opponentScore = json.opponent_score
     }
     answerClick(event) {
-        var n = event.currentTarget.getAttribute('data-id')
-        this.state.selected_answer === n ? this.setState({'selected_answer' : 0}) : this.setState({'selected_answer' : n})
+        if (!this.state.answered) {
+            var n = event.currentTarget.getAttribute('data-id')
+            this.state.selected_answer === n ? this.setState({'selected_answer' : 0}) : this.setState({'selected_answer' : n})
+        }
     }
     submitAnswer() {
         Message.setFlush(true)
         if (this.state.selected_answer < 1 || this.state.selected_answer > 4) {
             Message.addMessage('error','Seleziona una risposta valida')
-        } else {
+        } else if (!this.state.answered) {
             // Invio risposta al server
             Api.reply({
                 match_id: localStorage.match_id,
@@ -81,6 +106,10 @@ class Match extends Component {
         } else {
             answerNode.classList.add('wrong')
         }
+
+        this.setState({
+            answered: true
+        })
     }
     render() {
         return (

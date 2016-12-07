@@ -16,7 +16,8 @@ function itemObj(link, value) {
 function getItemsByRoute(route) {
     var items = [];
     var cookie = getCookie('user_token');
-
+    route = route.length > 1 && route[0] === '/' ? route.split('/')[1] : route
+    console.log(route)
     switch(route) {
         case '/':
             if(cookie) items.push(itemObj('/user', 'Profilo'))
@@ -25,15 +26,17 @@ function getItemsByRoute(route) {
                 items.push(itemObj('/register', 'Registrati'))
             }
             break;
-        case '/login':
+        case 'login':
             items.push(itemObj('/', 'Homepage'))
             items.push(itemObj('/register', 'Registrati'))
             break;
-        case '/register':
+        case 'register':
             items.push(itemObj('/', 'Homepage'))
             items.push(itemObj('/login', 'Login'))
             break;
-        case '/searchMatch':
+        case 'searchMatch':
+        case 'match':
+        case 'endmatch':
             items.push(itemObj('/user', 'Profilo'))
             break;
         default:

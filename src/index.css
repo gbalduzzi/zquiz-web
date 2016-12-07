@@ -279,6 +279,29 @@ body {
 }
 
 /*
+ * EndMatch section
+ */
+.App .endmatch .lostpage span,
+.App .endmatch .winpage span {
+    font-size: 15pt;
+}
+
+.App .endmatch .lostpage .lostscore {
+    color: red
+}
+
+.App .endmatch .profilelink {
+    display: block;
+    margin-top : 40px;
+    text-decoration: none;
+    color: #0F6910;
+}
+
+.App .endmatch .profilelink:hover {
+    text-decoration: underline;
+}
+
+/*
  * Forms
  */
 .App .auth-form {

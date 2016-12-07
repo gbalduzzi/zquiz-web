@@ -169,6 +169,30 @@ class Api {
             console.log(error);
         });
     }
+
+    /*
+     * endMatch
+     * fn is the success function callback
+     */
+    static endMatch(fn) {
+        var token = getCookie('user_token');
+        var match_id = localStorage.match_id;
+
+        fetch(url+'/endmatch?token='+encodeURIComponent(token)+"&match_id="+encodeURIComponent(match_id), {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+        .then(function(response) {
+            return response.json();
+        }).then(function(json) {
+            fn(json);
+        })
+        .catch(function(error) {
+            console.log("Errore!");
+            console.log(error);
+        });
+    }
 }
 
 export default Api;

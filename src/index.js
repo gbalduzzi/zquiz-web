@@ -12,6 +12,7 @@ import Logout from './Pages/Logout';
 import User from './Pages/User';
 import SearchMatch from './Pages/SearchMatch';
 import Match from './Pages/Match';
+import EndMatch from './Pages/EndMatch';
 
 // Css
 import './index.css';
@@ -28,6 +29,7 @@ ReactDOM.render((
             <Route path="/user" component={User}> </Route>
             <Route path="/searchMatch" component={SearchMatch}> </Route>
             <Route path="/match/:qid" component={Match}> </Route>
+            <Route path="/endmatch/:qid" component={EndMatch}> </Route>
             <Route path="/logout" component={Logout}> </Route>
         </Route>
     </Router>),
