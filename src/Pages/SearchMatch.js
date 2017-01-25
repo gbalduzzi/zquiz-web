@@ -14,7 +14,7 @@ class SearchMatch extends Component {
         Api.searchMatch(this.checkMatch)
     }
     checkMatch(json) {
-        if (json.error !== 0) {
+        if (json.error !== undefined && json.error > 0) {
             clearInterval(this.searchTimer)
             this.props.router.push('/user')
             Message.addMessage('error','Si è verificato un errore. Preghiamo di riprovare')
@@ -30,7 +30,7 @@ class SearchMatch extends Component {
         }
     }
     setOpponentDetails(json) {
-        if (json.error === 0) {
+        if (json.error === undefined) {
             localStorage.opponentName = json.name
             localStorage.opponentSurname = json.surname
             localStorage.opponentWins = json.wins

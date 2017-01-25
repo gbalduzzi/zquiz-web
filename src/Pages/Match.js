@@ -63,7 +63,7 @@ class Match extends Component {
 
         this.setState({
             question: {
-                number : parseInt(json.question_id, 10),
+                number : parseInt(this.state.question.number, 10)+1,
                 question : json.question,
                 answer_one : json.answer_one,
                 answer_two : json.answer_two,
@@ -81,11 +81,13 @@ class Match extends Component {
     }
     answerClick(event) {
         if (!this.state.answered) {
+            console.log(event)
             var n = event.currentTarget.getAttribute('data-id')
             this.state.selected_answer === n ? this.setState({'selected_answer' : 0}) : this.setState({'selected_answer' : n})
         }
     }
     submitAnswer() {
+        console.log(this.state)
         Message.setFlush(true)
         if (this.state.selected_answer < 1 || this.state.selected_answer > 4) {
             Message.addMessage('error','Seleziona una risposta valida')
@@ -93,7 +95,8 @@ class Match extends Component {
             // Invio risposta al server
             Api.reply({
                 match_id: localStorage.match_id,
-                number: this.state.selected_answer,
+                number: parseInt(this.state.question.number, 10),
+                reply_id: parseInt(this.state.selected_answer, 10)
             }, this.verifyCorrectAnswer)
         }
     }

@@ -10,7 +10,7 @@ class Login extends Component {
         this.loginCallback = this.loginCallback.bind(this)
     }
     loginCallback(json) {
-        if (json.error === 0) {
+        if (json.error === undefined) {
             Message.addMessage('success','Login eseguito con successo')
             setTimeout(this.props.router.push('/user'), 1000)
         } else {

@@ -16,22 +16,21 @@ class Api {
      * fn is the success function callback
      */
     static register(data,fn) {
+        var bodyStr=    "username=" + encodeURIComponent(data.username) +
+                        "&password="+encodeURIComponent(data.password) +
+                        "&name="+encodeURIComponent(data.name) +
+                        "&surname="+encodeURIComponent(data.surname)
         fetch(url+'/register', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
             },
-            body: JSON.stringify({
-                username: data.username,
-                password: data.password,
-                name: data.name,
-                surname: data.surname
-            })
+            body: bodyStr
         })
         .then(function(response) {
             return response.json();
         }).then(function(json) {
-            if (json.error === 0 && json.token) {
+            if (json.token) {
                 setCookie('user_token',json.token,30);
             }
             fn(json);
@@ -48,21 +47,20 @@ class Api {
      * fn is the success function callback
      */
     static authenticate(data,fn) {
+        var bodyStr= "username=" + encodeURIComponent(data.username) +"&password="+encodeURIComponent(data.password)
         fetch(url+'/authenticate', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
             },
-            body: JSON.stringify({
-                username: data.username,
-                password: data.password,
-            })
+            body: bodyStr
         })
         .then(function(response) {
             return response.json();
         }).then(function(json) {
+            console.log(json)
             // Imposta cookie se c'è il token
-            if (json.error === 0 && json.token) {
+            if (json.token !== undefined) {
                 setCookie('user_token',json.token,30);
             }
             fn(json);
@@ -148,16 +146,16 @@ class Api {
      * fn is the success function callback
      */
     static reply(data,fn) {
+        var bodyStr= "match_id=" + encodeURIComponent(data.match_id) +
+                     "&number="+encodeURIComponent(data.number) +
+                     "&token="+getCookie('user_token') +
+                     "&reply_n="+ encodeURIComponent(data.reply_id)
         fetch(url+'/reply', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
             },
-            body: JSON.stringify({
-                match_id: data.match_id,
-                number: data.number,
-                token: getCookie('user_token')
-            })
+            body: bodyStr
         })
         .then(function(response) {
             return response.json();

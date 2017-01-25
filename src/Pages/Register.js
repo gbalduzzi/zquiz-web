@@ -10,7 +10,7 @@ class Register extends Component {
         this.registerCallback = this.registerCallback.bind(this)
     }
     registerCallback(json) {
-        if (json.error === 0) {
+        if (json.error === undefined) {
             Message.addMessage('success','La registrazione ha avuto successo!')
             setTimeout(this.props.router.push('/user'), 1000)
         } else {

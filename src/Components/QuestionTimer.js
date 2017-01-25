@@ -11,21 +11,24 @@ class QuestionTimer extends Component {
     componentDidMount() {
         this.decrementTimer()
     }
+    componentWillUnmount() {
+        clearInterval(this.realTimer)
+    }
     componentWillReceiveProps(nextProps) {
           if (nextProps.question !== this.props.question) {
               this.setState({
                   timer: 0
               })
-               this.decrementTimer()
+              this.decrementTimer()
           }
     }
     decrementTimer() {
         var timer = new Date();
-        var decrementTimer = setInterval(function() {
+        this.realTimer = setInterval(function() {
             var dt = Math.round(((new Date()) - timer) / 1000);
             if (dt >= config.question_time + 1) {
                 this.setState({ timer: config.question_time})
-                clearInterval(decrementTimer)
+                clearInterval(this.realTimer)
                 this.props.endCallback()
             } else {
                 this.setState({timer : dt})

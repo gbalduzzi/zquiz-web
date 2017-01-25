@@ -17,7 +17,7 @@ class User extends Component {
         initLocalStorage();
     }
     setUserData(json) {
-        if (json.error === 0) {
+        if (json.error === undefined) {
             this.setState({
                 username : json.username,
                 name :     json.name,
