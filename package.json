@@ -19,5 +19,5 @@
     "eject": "react-scripts eject",
     "deploy": "gh-pages -d build"
   },
-  "homepage": "https://gbalduzzi.github.io/zquiz-web"
+  "homepage": "http://gbalduzzi.github.io/zquiz-web"
 }
